@@ -47,6 +47,13 @@ class Games():
 		name   : Pokémon's name
 		'''
 		params = content.split()
+		easter = False
+		try:
+			params[1]
+			if params[1] == "f":
+				easter = True
+		except IndexError:
+			pass
 		try:
 			currPoke = pokedex.get_pokemon_by_number(int(params[0]))
 		except ValueError:
@@ -58,6 +65,7 @@ class Games():
 			await ctx.send("Pokemon does not exist!\nDid you spell it right?")
 			return
 
+
 		msgContent		= ""
 
 		embedColor		= 0xff0000
@@ -68,6 +76,7 @@ class Games():
 		embedFooterIcon	= "https://cdn.bulbagarden.net/upload/9/9f/Key_Pok%C3%A9dex_m_Sprite.png"
 
 		pName			= currPoke[0]["name"]
+		pNumber 		= currPoke[0]["number"]
 		pSpecies		= currPoke[0]["species"] + " Pokémon"
 		pTypes			= currPoke[0]["types"]
 		pAbilities		= currPoke[0]["abilities"]
@@ -95,6 +104,24 @@ class Games():
 		for x in pEvolutions:
 			fEvolutions += x + ", "
 		fEvolutions = fEvolutions[:-2]
+
+		#stupid easter egg shit
+
+		if easter and str(pNumber) == "123":
+			fEvolutions = "\"fuck\""
+			titleEvolutions = "Qoutes"
+		if easter and str(pNumber) == "420":
+			fTypes = "Grass, Fire"
+			fEvolutions = "Weedie, Cannabilis, Blazitkin"
+			fAbilities = "Normal: Hit It\nHidden: Hide It From The Cops"
+			pName = "Weedie"
+			pSpecies = "Lit Pokémon"
+			pThumbnail = "https://i.kym-cdn.com/photos/images/original/001/165/778/f7c.jpg"
+			embedFooter = "Tokédex Lookup"
+		if easter and str(pNumber) == "69":
+			await ctx.send(":eyes:")
+			return
+
 
 		embed = discord.Embed	(	title	= pSpecies 			,
 							  		colour	= embedColor		)
