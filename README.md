@@ -1,7 +1,7 @@
 # Discord Bot (dBot)
 
 Just a discord bot for a personal server, feel free to use if you want.  
-Uses Async branch of discord.py
+Uses discord.py 1.0.0a
 
 Current implemented commands:
 * ping - Gets latency of bot
