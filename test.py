@@ -3,7 +3,7 @@ import random
 from discord.ext import commands
 
 prefix = "?"
-startup_extensions = ["paper", "debug"]
+startup_extensions = ["games", "debug"]
 bot = commands.Bot(command_prefix=prefix)
 
 @bot.event
