@@ -1,10 +1,14 @@
 import discord
 import random
+import praw
+import config as cfg
 from discord.ext import commands
 
 from pokedex import pokedex
 pokedex = pokedex.Pokedex()
-
+reddit = praw.Reddit(	client_id=cfg.redID,
+						client_secret=cfg.redSecret,
+						user_agent=cfg.redAgent)
 class Games():
 	'''
 	Gaming related commands
@@ -37,6 +41,31 @@ class Games():
 			total += results[x]
 		output = output[:-2] + "`\nTotal: " + str(total)
 		await ctx.send(output)
+
+	@commands.command()
+	async def beget(self, ctx, *, content:str):
+		'''
+		Gets a post from the hot page of a subreddit
+
+		Usage  : beget <sub> [top]
+		sub    : an existing subreddit
+		top    : if true, do top posts
+		'''
+		params = content.split()
+		try:
+			if params[1] == "true":
+				redSub = reddit.subreddit(params[0]).top()
+			else:
+				redSub = reddit.subreddit(params[0]).hot()
+		except:
+				redSub = reddit.subreddit(params[0]).hot()
+		try:
+			post_to_pick = random.randint(1, 10)
+			for i in range(0, post_to_pick):
+				submission = next(x for x in redSub if not x.stickied)
+			await ctx.send(submission.url)
+		except:
+			await ctx.send("Ran into a problem! Is that a subreddit that exists?")
 
 	@commands.command()
 	async def pokedex(self, ctx, *, content:str):

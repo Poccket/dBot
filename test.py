@@ -1,9 +1,11 @@
 import discord
+import random
 from discord.ext import commands
 import config as cfg 
 
 startup_extensions = ["games", "debug"]
 bot = commands.Bot(command_prefix=cfg.prefix)
+
 
 @bot.event
 async def on_ready():

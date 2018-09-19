@@ -1,2 +1,5 @@
-token	= "INSERT_TOKEN_HERE"
+token	= "###"
 prefix	= "?"
+redID="###"
+redSecret="###"
+redAgent="###"
