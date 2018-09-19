@@ -1,4 +1,5 @@
 import discord
+import random
 from discord.ext import commands
 
 from pokedex import pokedex
@@ -107,21 +108,23 @@ class Games():
 
 		#stupid easter egg shit
 
-		if easter and str(pNumber) == "123":
-			fEvolutions = "\"fuck\""
-			titleEvolutions = "Qoutes"
-		if easter and str(pNumber) == "420":
-			fTypes = "Grass, Fire"
-			fEvolutions = "Weedie, Cannabilis, Blazitkin"
-			fAbilities = "Normal: Hit It\nHidden: Hide It From The Cops"
-			pName = "Weedie"
-			pSpecies = "Lit Pokémon"
-			pThumbnail = "https://i.kym-cdn.com/photos/images/original/001/165/778/f7c.jpg"
-			embedFooter = "Tokédex Lookup"
-		if easter and str(pNumber) == "69":
-			await ctx.send(":eyes:")
-			return
+		if easter:
+			if str(pNumber) == "123":
+				fEvolutions = "\"fuck\""
+				titleEvolutions = "Qoutes"
+			if easter and str(pNumber) == "420":
+				fTypes = "Grass, Fire"
+				fEvolutions = "Weedie, Cannabilis, Blazitkin"
+				fAbilities = "Normal: Hit It\nHidden: Hide It From The Cops"
+				pName = "Weedie"
+				pSpecies = "Lit Pokémon"
+				pThumbnail = "https://i.kym-cdn.com/photos/images/original/001/165/778/f7c.jpg"
+				embedFooter = "Tokédex Lookup"
+			if easter and str(pNumber) == "69":
+				await ctx.send(":eyes:")
+				return
 
+		# end easter egg shit
 
 		embed = discord.Embed	(	title	= pSpecies 			,
 							  		colour	= embedColor		)
