@@ -112,7 +112,7 @@ class Games():
 			if str(pNumber) == "123":
 				fEvolutions = "\"fuck\""
 				titleEvolutions = "Qoutes"
-			if easter and str(pNumber) == "420":
+			if str(pNumber) == "420":
 				fTypes = "Grass, Fire"
 				fEvolutions = "Weedie, Cannabilis, Blazitkin"
 				fAbilities = "Normal: Hit It\nHidden: Hide It From The Cops"
@@ -120,7 +120,7 @@ class Games():
 				pSpecies = "Lit Pokémon"
 				pThumbnail = "https://i.kym-cdn.com/photos/images/original/001/165/778/f7c.jpg"
 				embedFooter = "Tokédex Lookup"
-			if easter and str(pNumber) == "69":
+			if str(pNumber) == "69":
 				await ctx.send(":eyes:")
 				return
 
