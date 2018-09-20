@@ -98,7 +98,7 @@ class Games():
 
 
 
-	@commands.command()
+	@commands.command(hidden=true)
 	async def gather(self, ctx, *, content:str):
 		'''
 		reddit search sucks good luck
