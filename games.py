@@ -47,22 +47,73 @@ class Games():
 		'''
 		Gets a post from the hot page of a subreddit
 
-		Usage  : beget <sub> [top]
+		Usage  : beget <sub> [mode]
 		sub    : an existing subreddit
-		top    : if true, do top posts
+		mode   : top/hot/new
 		'''
 		params = content.split()
 		try:
-			if params[1] == "true":
+			if params[1] == "hot":
 				redSub = reddit.subreddit(params[0]).top()
+			elif params[1] == "new":
+				redSub = reddit.subreddit(params[0]).new()
 			else:
 				redSub = reddit.subreddit(params[0]).hot()
 		except:
-				redSub = reddit.subreddit(params[0]).hot()
+			redSub = reddit.subreddit(params[0]).hot()
 		try:
-			post_to_pick = random.randint(1, 10)
+			post_to_pick = random.randint(1, 50)
 			for i in range(0, post_to_pick):
 				submission = next(x for x in redSub if not x.stickied)
+		except:
+			await ctx.send("Ran into a problem! Is that a subreddit that exists?")
+			return
+
+		msgContent		= ""
+
+		embedColor		= 0x36bae1
+		embedIcon 		= "https://cdn1.iconfinder.com/data/icons/somacro___dpi_social_media_icons_by_vervex-dfjq/500/reddit.png"
+		embedLink		= "https://www.reddit.com" + submission.permalink
+		embedFooterIcon	= "http://i.imgur.com/kOge0.png"
+
+		pName 			= submission.title
+		pCCount			= submission.num_comments
+		pScore 			= submission.score
+		pURL			= submission.url
+		embedFooter 	= str(pScore) + " points /// " + str(pCCount) + " comments"
+
+		embed = discord.Embed 	(	colour	= embedColor		)
+		embed.set_author		(	name 	= pName 			,
+									url 	= embedLink			,
+									icon_url= embedIcon 		)
+		try:
+			embed.set_image		(	url 	= pURL				)
+		except:
+			embed.add_field		(	name    = "Content:",
+									value 	= submission.selftext)
+		embed.set_footer		(	text	= embedFooter 		,
+									icon_url= embedFooterIcon 	)
+
+		await ctx.send(content = msgContent, embed = embed)
+
+
+
+	@commands.command()
+	async def gather(self, ctx, *, content:str):
+		'''
+		reddit search sucks good luck
+
+		Usage  : gather <sub> <term>
+		sub    : subreddit
+		term   : search term
+		'''
+		params = content.split()
+		try:
+			redSub = reddit.subreddit(params[0])
+			post_to_pick = random.randint(1, 10)
+			bluSub = redSub.search(params[1], limit=10)
+			for i in range(0, post_to_pick):
+				submission = next(x for x in bluSub if not x.stickied)
 			await ctx.send(submission.url)
 		except:
 			await ctx.send("Ran into a problem! Is that a subreddit that exists?")
