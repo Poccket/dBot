@@ -8,7 +8,8 @@ Current implemented commands:
 * roll    - Rolls a set of die
 * pokedex - Gets pokedex entry
 * beget   - Gets image from subreddit
-requirements:
+
+Requirements:
 * python 3.6
 * discord.py 1.0.0a
 * pokedex.py 1.1.0
