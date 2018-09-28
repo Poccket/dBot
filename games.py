@@ -53,7 +53,7 @@ class Games():
 		'''
 		params = content.split()
 		try:
-			if params[1] == "hot":
+			if params[1] == "top":
 				redSub = reddit.subreddit(params[0]).top()
 			elif params[1] == "new":
 				redSub = reddit.subreddit(params[0]).new()
@@ -80,6 +80,8 @@ class Games():
 		pCCount			= submission.num_comments
 		pScore 			= submission.score
 		pURL			= submission.url
+		if pURL[:-5] == "http://www.imgur.com/":
+			pURL += ".gif"
 		embedFooter 	= str(pScore) + " points /// " + str(pCCount) + " comments"
 
 		embed = discord.Embed 	(	colour	= embedColor		)
@@ -98,7 +100,7 @@ class Games():
 
 
 
-	@commands.command(hidden=true)
+	@commands.command(hidden=True)
 	async def gather(self, ctx, *, content:str):
 		'''
 		reddit search sucks good luck
